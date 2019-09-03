@@ -4,6 +4,7 @@ const db = require("./data/db.js");
 const server = express();
 
 server.use(express.json()); // teaches express to parse JSON body
+server.use(cors());
 
 // ADD POST
 server.post("/api/posts", (req, res) => {
@@ -178,11 +179,9 @@ server.put("/api/posts/:id", (req, res) => {
                   res.status(200).json(post);
                 })
                 .catch(error => {
-                  res
-                    .status(500)
-                    .json({
-                      message: "The post with the specified ID does not exist.",
-                    });
+                  res.status(500).json({
+                    message: "The post with the specified ID does not exist.",
+                  });
                 });
             })
             .catch(error => {
